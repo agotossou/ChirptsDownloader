@@ -1,0 +1,18 @@
+Package: ChirptsDownloader
+Type: Package
+Title: CHIRPS, CHIRP and CHIRTS TIF Downloader Shiny App
+Version: 0.1.0
+Authors@R: 
+  person("Agossou", "Gadedjisso-Tossou", , "gadedjissotossou@gmail.com", role = c("aut", "cre"))
+Description: Shiny app to download CHIRPS, CHIRP and CHIRTS TIF files.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: 
+    curl,
+    shiny,
+    utils
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
