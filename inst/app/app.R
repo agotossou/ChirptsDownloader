@@ -421,7 +421,7 @@ server <- function(input, output, session) {
   # ---------------------------
   # Tab 2 logic: CHIRPS Daily Downloader (ERA5)
   # ---------------------------
-  base_url_daily <- "https://data.chc.ucsb.edu/products/CHIRPS/v3.0/daily/final/sat/"
+  base_url_daily <- "https://data.chc.ucsb.edu/products/CHIRPS/v3.0/daily/final/rnl/"
   logtext_daily <- reactiveVal("")
   appendLog_daily <- function(txt) {
     logtext_daily(paste0(logtext_daily(), if (nzchar(logtext_daily())) "\n" else "", txt))
@@ -450,7 +450,7 @@ server <- function(input, output, session) {
     end_date <- tryCatch(as.Date(sprintf("%04d-%02d-%02d", input$end_year_daily,input$end_month_daily,input$end_day_daily)), error=function(e) NA)
     if (is.na(start_date)) return("Start date is invalid.")
     if (is.na(end_date)) return("End date is invalid.")
-    if (start_date < as.Date("1998-01-01")) return("Start date cannot be earlier than 1998-01-01.")
+    if (start_date < as.Date("1981-01-01")) return("Start date cannot be earlier than 1981-01-01.")
     if (start_date > end_date) return("Start date must be earlier than or equal to end date.")
     if (end_date > Sys.Date()) return("Years cannot be in the future.")
     if (!dir.exists(input$outdir_daily)) return("Output folder does not exist. Please create it before downloading.")
@@ -465,7 +465,7 @@ server <- function(input, output, session) {
     cur <- list(year=input$start_year_daily, month=input$start_month_daily, day=input$start_day_daily)
     end <- list(year=input$end_year_daily, month=input$end_month_daily, day=input$end_day_daily)
     while (is_before_or_equal(cur$year, cur$month, cur$day, end$year, end$month, end$day)) {
-      fname <- sprintf("chirps-v3.0.sat.%04d.%02d.%02d.tif", cur$year, cur$month, cur$day)
+      fname <- sprintf("chirps-v3.0.rnl.%04d.%02d.%02d.tif", cur$year, cur$month, cur$day)
       url <- paste0(base_url_daily, cur$year, "/", fname)
       files[[fname]] <- url
       cur <- next_day(cur$year, cur$month, cur$day)
